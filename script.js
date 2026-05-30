@@ -29,6 +29,7 @@ const storageKeys = {
   recent: 'font-explorer-recent',
   theme: 'font-explorer-theme'
 };
+const MAX_RECENT_FONTS = 8;
 
 function readJson(key, fallback) {
   try {
@@ -104,7 +105,7 @@ function genericFamily(category) {
 }
 
 function markRecentlyViewed(fontName) {
-  state.recent = [fontName, ...state.recent.filter((name) => name !== fontName)].slice(0, 8);
+  state.recent = [fontName, ...state.recent.filter((name) => name !== fontName)].slice(0, MAX_RECENT_FONTS);
   saveState();
   renderMetaPanels();
 }
@@ -176,8 +177,6 @@ function renderGallery() {
     viewLink.href = `https://fonts.google.com/specimen/${font.name.replace(/ /g, '+')}`;
     viewLink.textContent = 'Download/View';
     viewLink.addEventListener('click', () => markRecentlyViewed(font.name));
-
-    node.addEventListener('mouseenter', () => markRecentlyViewed(font.name), { once: true });
 
     els.gallery.appendChild(node);
   });

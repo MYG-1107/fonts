@@ -9,9 +9,9 @@ Static front-end project showcasing Google Fonts with:
 
 ## Run locally
 
-Open `/tmp/workspace/MYG-1107/fonts/index.html` in a browser, or serve the folder:
+Open `index.html` in a browser, or serve the project folder:
 
 ```bash
-cd /tmp/workspace/MYG-1107/fonts
+cd fonts
 python3 -m http.server 4173
 ```
