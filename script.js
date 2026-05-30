@@ -10,7 +10,7 @@ const fonts = [
   { name: 'Playfair Display', category: 'serif', popularity: 8, pairing: 'Lato' },
   { name: 'Lora', category: 'serif', popularity: 7, pairing: 'Open Sans' },
   { name: 'PT Serif', category: 'serif', popularity: 6, pairing: 'Nunito' },
-  { name: 'Bitter', category: 'serif', popularity: 6, pairing: 'Source Sans 3' },
+  { name: 'Bitter', category: 'serif', popularity: 6, pairing: 'Open Sans' },
   { name: 'Oswald', category: 'display', popularity: 8, pairing: 'Lora' },
   { name: 'Bebas Neue', category: 'display', popularity: 7, pairing: 'Roboto' },
   { name: 'Anton', category: 'display', popularity: 7, pairing: 'Open Sans' },
@@ -18,7 +18,7 @@ const fonts = [
   { name: 'Pacifico', category: 'handwriting', popularity: 6, pairing: 'Poppins' },
   { name: 'Dancing Script', category: 'handwriting', popularity: 7, pairing: 'Roboto' },
   { name: 'Caveat', category: 'handwriting', popularity: 6, pairing: 'Lato' },
-  { name: 'Fira Code', category: 'monospace', popularity: 7, pairing: 'Inter' },
+  { name: 'Fira Code', category: 'monospace', popularity: 7, pairing: 'Roboto' },
   { name: 'Source Code Pro', category: 'monospace', popularity: 6, pairing: 'Merriweather' },
   { name: 'JetBrains Mono', category: 'monospace', popularity: 7, pairing: 'Poppins' },
   { name: 'Inconsolata', category: 'monospace', popularity: 5, pairing: 'Lora' }
@@ -29,7 +29,10 @@ const storageKeys = {
   recent: 'font-explorer-recent',
   theme: 'font-explorer-theme'
 };
+const GOOGLE_FONTS_WEIGHTS = ':wght@400;700';
 const MAX_RECENT_FONTS = 8;
+const MIN_COMPARE_SIZES = { alphabet: 20, numbers: 16, paragraph: 14 };
+const COMPARE_SIZE_OFFSETS = { alphabet: 4, numbers: 8, paragraph: 10 };
 
 function readJson(key, fallback) {
   try {
@@ -68,8 +71,9 @@ const els = {
 };
 
 function importGoogleFonts() {
+  if (!fonts.length) return;
   // Load all selected Google Fonts in one stylesheet request.
-  const families = fonts.map(({ name }) => name.replace(/ /g, '+') + ':wght@400;700').join('&family=');
+  const families = fonts.map(({ name }) => name.replace(/ /g, '+') + GOOGLE_FONTS_WEIGHTS).join('&family=');
   const link = document.createElement('link');
   link.rel = 'stylesheet';
   link.href = `https://fonts.googleapis.com/css2?family=${families}&display=swap`;
@@ -133,6 +137,16 @@ function renderGallery() {
   const data = filteredFonts();
   els.resultCount.textContent = `${data.length} font${data.length === 1 ? '' : 's'} shown`;
   els.gallery.textContent = '';
+  els.gallery.setAttribute('aria-label', data.length ? 'Font gallery results' : 'No fonts match current filters');
+  els.gallery.setAttribute('role', data.length ? 'list' : 'region');
+
+  if (!data.length) {
+    const empty = document.createElement('p');
+    empty.className = 'sample-block';
+    empty.textContent = 'No fonts found. Try a different search or filter.';
+    els.gallery.appendChild(empty);
+    return;
+  }
 
   data.forEach((font) => {
     const node = els.template.content.firstElementChild.cloneNode(true);
@@ -163,7 +177,10 @@ function renderGallery() {
       try {
         await navigator.clipboard.writeText(value);
       } catch {
-        copyBtn.textContent = 'Copy unavailable';
+        copyBtn.textContent = 'Copy failed';
+        setTimeout(() => {
+          copyBtn.textContent = 'Copy CSS';
+        }, 1000);
         return;
       }
       copyBtn.textContent = 'Copied!';
@@ -195,27 +212,65 @@ function renderComparison() {
   }
 
   selected.forEach((name) => {
-    const card = document.createElement('article');
-    card.className = 'compare-card';
     const family = fonts.find((font) => font.name === name);
     const fallback = genericFamily(family ? family.category : 'sans-serif');
-    card.innerHTML = `
-      <h3>${name}</h3>
-      <p style="font-family: '${name}', ${fallback}; font-size: ${Math.max(20, state.size - 4)}px;">Aa Bb Cc Dd Ee Ff Gg</p>
-      <p style="font-family: '${name}', ${fallback}; font-size: ${Math.max(16, state.size - 8)}px;">0123456789 !@#$%</p>
-      <p style="font-family: '${name}', ${fallback}; font-size: ${Math.max(14, state.size - 10)}px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    `;
+    const sampleSizes = {
+      alphabet: Math.max(MIN_COMPARE_SIZES.alphabet, state.size - COMPARE_SIZE_OFFSETS.alphabet),
+      numbers: Math.max(MIN_COMPARE_SIZES.numbers, state.size - COMPARE_SIZE_OFFSETS.numbers),
+      paragraph: Math.max(MIN_COMPARE_SIZES.paragraph, state.size - COMPARE_SIZE_OFFSETS.paragraph)
+    };
+    const card = document.createElement('article');
+    card.className = 'compare-card';
+    const title = document.createElement('h3');
+    title.textContent = name;
+
+    const alphabet = document.createElement('p');
+    alphabet.textContent = 'Aa Bb Cc Dd Ee Ff Gg';
+    alphabet.style.fontFamily = `'${name}', ${fallback}`;
+    alphabet.style.fontSize = `${sampleSizes.alphabet}px`;
+
+    const numbers = document.createElement('p');
+    numbers.textContent = '0123456789 !@#$%';
+    numbers.style.fontFamily = `'${name}', ${fallback}`;
+    numbers.style.fontSize = `${sampleSizes.numbers}px`;
+
+    const paragraph = document.createElement('p');
+    paragraph.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+    paragraph.style.fontFamily = `'${name}', ${fallback}`;
+    paragraph.style.fontSize = `${sampleSizes.paragraph}px`;
+
+    card.append(title, alphabet, numbers, paragraph);
     els.comparison.appendChild(card);
   });
 }
 
 function renderMetaPanels() {
-  els.favorites.innerHTML = [...state.favorites]
-    .sort((a, b) => a.localeCompare(b))
-    .map((name) => `<li>${name}</li>`)
-    .join('') || '<li>No favorites yet.</li>';
+  const favorites = [...state.favorites].sort((a, b) => a.localeCompare(b));
+  els.favorites.textContent = '';
+  if (!favorites.length) {
+    const li = document.createElement('li');
+    li.textContent = 'No favorites yet.';
+    els.favorites.appendChild(li);
+  } else {
+    favorites.forEach((name) => {
+      const li = document.createElement('li');
+      li.textContent = name;
+      els.favorites.appendChild(li);
+    });
+  }
 
-  els.recent.innerHTML = state.recent.map((name) => `<li>${name}</li>`).join('') || '<li>No recent views yet.</li>';
+  els.recent.textContent = '';
+  if (!state.recent.length) {
+    const li = document.createElement('li');
+    li.textContent = 'No recent views yet.';
+    els.recent.appendChild(li);
+  } else {
+    state.recent.forEach((name) => {
+      const li = document.createElement('li');
+      li.textContent = name;
+      els.recent.appendChild(li);
+    });
+  }
 }
 
 function applyTheme() {
