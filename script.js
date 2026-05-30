@@ -21,7 +21,32 @@ const fonts = [
   { name: 'Fira Code', category: 'monospace', popularity: 7, pairing: 'Inter' },
   { name: 'Source Code Pro', category: 'monospace', popularity: 6, pairing: 'Merriweather' },
   { name: 'JetBrains Mono', category: 'monospace', popularity: 7, pairing: 'Poppins' },
-  { name: 'Inconsolata', category: 'monospace', popularity: 5, pairing: 'Lora' }
+  { name: 'Inconsolata', category: 'monospace', popularity: 5, pairing: 'Lora' },
+  { name: 'Inter', category: 'sans-serif', popularity: 9, pairing: 'Merriweather' },
+  { name: 'Raleway', category: 'sans-serif', popularity: 8, pairing: 'Playfair Display' },
+  { name: 'Work Sans', category: 'sans-serif', popularity: 8, pairing: 'Lora' },
+  { name: 'Source Sans 3', category: 'sans-serif', popularity: 7, pairing: 'Bitter' },
+  { name: 'Ubuntu', category: 'sans-serif', popularity: 7, pairing: 'PT Serif' },
+  { name: 'Nunito Sans', category: 'sans-serif', popularity: 7, pairing: 'Playfair Display' },
+  { name: 'Noto Sans', category: 'sans-serif', popularity: 7, pairing: 'Noto Serif' },
+  { name: 'Rubik', category: 'sans-serif', popularity: 6, pairing: 'Crimson Pro' },
+  { name: 'Manrope', category: 'sans-serif', popularity: 6, pairing: 'Cormorant Garamond' },
+  { name: 'Quicksand', category: 'sans-serif', popularity: 6, pairing: 'Spectral' },
+  { name: 'Noto Serif', category: 'serif', popularity: 7, pairing: 'Noto Sans' },
+  { name: 'Libre Baskerville', category: 'serif', popularity: 7, pairing: 'Roboto' },
+  { name: 'Crimson Pro', category: 'serif', popularity: 6, pairing: 'Work Sans' },
+  { name: 'Cormorant Garamond', category: 'serif', popularity: 6, pairing: 'Raleway' },
+  { name: 'Spectral', category: 'serif', popularity: 6, pairing: 'Poppins' },
+  { name: 'DM Serif Display', category: 'display', popularity: 7, pairing: 'Inter' },
+  { name: 'Cinzel', category: 'display', popularity: 6, pairing: 'Nunito' },
+  { name: 'Archivo Black', category: 'display', popularity: 6, pairing: 'Lato' },
+  { name: 'Alfa Slab One', category: 'display', popularity: 6, pairing: 'Open Sans' },
+  { name: 'Great Vibes', category: 'handwriting', popularity: 6, pairing: 'Montserrat' },
+  { name: 'Amatic SC', category: 'handwriting', popularity: 6, pairing: 'Roboto' },
+  { name: 'Indie Flower', category: 'handwriting', popularity: 6, pairing: 'Lato' },
+  { name: 'IBM Plex Mono', category: 'monospace', popularity: 6, pairing: 'Merriweather' },
+  { name: 'Roboto Mono', category: 'monospace', popularity: 7, pairing: 'Inter' },
+  { name: 'Space Mono', category: 'monospace', popularity: 6, pairing: 'Poppins' }
 ];
 
 const storageKeys = {
