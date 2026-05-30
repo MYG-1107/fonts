@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Font Explorer helps you browse, preview, compare, favorite, and copy Google Fonts quickly."
+    />
+    <title>Font Explorer</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div>
+        <h1>Font Explorer</h1>
+        <p class="subtitle">Explore, compare, and pick your next typeface.</p>
+      </div>
+      <div class="header-controls">
+        <label class="search-wrap" for="font-search">
+          <span class="sr-only">Search fonts</span>
+          <input id="font-search" type="search" placeholder="Search fonts..." autocomplete="off" />
+        </label>
+        <button id="theme-toggle" type="button" aria-label="Toggle light and dark mode">🌙</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="controls" aria-labelledby="preview-heading">
+        <h2 id="preview-heading">Live Preview</h2>
+        <div class="controls-grid">
+          <label>
+            Custom preview text
+            <input id="preview-text" type="text" value="The quick brown fox jumps over the lazy dog." />
+          </label>
+          <label>
+            Font size: <span id="font-size-output">32px</span>
+            <input id="font-size" type="range" min="12" max="72" value="32" />
+          </label>
+          <label>
+            Category
+            <select id="category-filter">
+              <option value="all">All categories</option>
+              <option value="sans-serif">Sans Serif</option>
+              <option value="serif">Serif</option>
+              <option value="display">Display</option>
+              <option value="handwriting">Handwriting</option>
+              <option value="monospace">Monospace</option>
+            </select>
+          </label>
+          <label>
+            Sort by
+            <select id="sort-by">
+              <option value="popularity">Popularity</option>
+              <option value="az">A-Z</option>
+              <option value="za">Z-A</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <section aria-labelledby="gallery-heading">
+        <div class="section-header">
+          <h2 id="gallery-heading">Font Gallery</h2>
+          <p id="result-count" aria-live="polite"></p>
+        </div>
+        <div id="font-gallery" class="font-gallery" role="list"></div>
+      </section>
+
+      <section class="comparison" aria-labelledby="compare-heading">
+        <h2 id="compare-heading">Comparison Tool (up to 3 fonts)</h2>
+        <div id="comparison-grid" class="comparison-grid"></div>
+      </section>
+
+      <section class="meta-panels" aria-label="Font activity">
+        <article>
+          <h2>Favorites</h2>
+          <ul id="favorites-list" class="meta-list"></ul>
+        </article>
+        <article>
+          <h2>Recently Viewed</h2>
+          <ul id="recent-list" class="meta-list"></ul>
+        </article>
+      </section>
+    </main>
+
+    <template id="font-card-template">
+      <article class="font-card" role="listitem">
+        <header>
+          <h3 class="font-name"></h3>
+          <span class="category-pill"></span>
+        </header>
+        <p class="font-preview"></p>
+        <div class="card-meta">
+          <span class="popularity-badge" aria-label="Popularity rating"></span>
+          <span class="pairing"></span>
+        </div>
+        <div class="card-actions">
+          <button class="favorite-btn" type="button"></button>
+          <button class="compare-btn" type="button"></button>
+          <button class="copy-btn" type="button">Copy CSS</button>
+          <a class="view-btn" target="_blank" rel="noopener noreferrer">Download/View</a>
+        </div>
+      </article>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>
