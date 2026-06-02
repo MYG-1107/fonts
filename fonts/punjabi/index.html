@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Discover curated fonts for punjabi and other Indian languages with preview samples and download links."
+    />
+    <title>Language Fonts | Font Explorer</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body data-language="punjabi">
+    <header class="site-header">
+      <div>
+        <p class="eyebrow">Font Explorer</p>
+        <h1 id="language-title">Language Fonts</h1>
+        <p id="language-subtitle" class="subtitle"></p>
+      </div>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/index.html">Home</a>
+        <a href="/fonts/english/">English</a>
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/terms-of-use/">Terms of Use</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="language-hero" aria-labelledby="language-title">
+        <div>
+          <h2>About this language</h2>
+          <p id="language-description"></p>
+        </div>
+        <div class="language-meta">
+          <p><span>Script</span><strong id="language-script"></strong></p>
+          <p><span>Fonts</span><strong id="font-count"></strong></p>
+        </div>
+      </section>
+
+      <section aria-labelledby="gallery-heading">
+        <div class="section-header">
+          <h2 id="gallery-heading">Font Gallery</h2>
+          <p id="result-count"></p>
+        </div>
+        <div id="font-gallery" class="font-gallery" role="list"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Font Explorer — curated language font collections for creators and publishers.</p>
+      <nav aria-label="Footer">
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/terms-of-use/">Terms of Use</a>
+        <a href="/sitemap.xml">Sitemap</a>
+      </nav>
+    </footer>
+
+    <template id="font-card-template">
+      <article class="font-card" role="listitem">
+        <header>
+          <h3 class="font-name"></h3>
+          <span class="category-pill"></span>
+        </header>
+        <p class="font-preview"></p>
+        <div class="card-meta">
+          <span class="popularity-badge script-pill"></span>
+          <span class="pairing style-pill"></span>
+        </div>
+        <div class="card-actions single">
+          <a class="view-btn" target="_blank" rel="noopener noreferrer">Download/View</a>
+        </div>
+      </article>
+    </template>
+
+    <script src="../../language-fonts.js"></script>
+    <script src="../../language-page.js"></script>
+  </body>
+</html>
