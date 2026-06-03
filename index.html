@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Font Explorer helps you browse, preview, compare, favorite, and copy Google Fonts quickly."
+      content="Font Explorer helps you browse English and Indian language fonts, preview families, and compare styles quickly."
     />
-    <title>Font Explorer</title>
+    <title>Font Explorer | Multi-language Font Library</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -26,6 +26,84 @@
     </header>
 
     <main>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/fonts/english/">English</a>
+        <a href="/fonts/hindi/">Hindi</a>
+        <a href="/fonts/telugu/">Telugu</a>
+        <a href="/fonts/marathi/">Marathi</a>
+        <a href="/fonts/tamil/">Tamil</a>
+        <a href="/fonts/malayalam/">Malayalam</a>
+        <a href="/fonts/kannada/">Kannada</a>
+        <a href="/fonts/punjabi/">Punjabi</a>
+        <a href="/fonts/gujarati/">Gujarati</a>
+        <a href="/fonts/odia/">Odia</a>
+        <a href="/fonts/bengali/">Bengali</a>
+        <a href="/fonts/urdu/">Urdu</a>
+        <a href="/fonts/assamese/">Assamese</a>
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/terms-of-use/">Terms of Use</a>
+      </nav>
+
+      <section class="language-directory" aria-labelledby="language-heading">
+        <div class="section-header">
+          <h2 id="language-heading">Browse by language</h2>
+          <p class="muted">25–30 fonts per language, with previews and download links.</p>
+        </div>
+        <div class="language-grid">
+          <a class="language-card" href="/fonts/english/">
+            <h3>English</h3>
+            <p>30 fonts • Latin script</p>
+          </a>
+          <a class="language-card" href="/fonts/hindi/">
+            <h3>Hindi</h3>
+            <p>25 fonts • Devanagari script</p>
+          </a>
+          <a class="language-card" href="/fonts/telugu/">
+            <h3>Telugu</h3>
+            <p>25 fonts • Telugu script</p>
+          </a>
+          <a class="language-card" href="/fonts/marathi/">
+            <h3>Marathi</h3>
+            <p>25 fonts • Devanagari script</p>
+          </a>
+          <a class="language-card" href="/fonts/tamil/">
+            <h3>Tamil</h3>
+            <p>25 fonts • Tamil script</p>
+          </a>
+          <a class="language-card" href="/fonts/malayalam/">
+            <h3>Malayalam</h3>
+            <p>25 fonts • Malayalam script</p>
+          </a>
+          <a class="language-card" href="/fonts/kannada/">
+            <h3>Kannada</h3>
+            <p>25 fonts • Kannada script</p>
+          </a>
+          <a class="language-card" href="/fonts/punjabi/">
+            <h3>Punjabi</h3>
+            <p>25 fonts • Gurmukhi script</p>
+          </a>
+          <a class="language-card" href="/fonts/gujarati/">
+            <h3>Gujarati</h3>
+            <p>25 fonts • Gujarati script</p>
+          </a>
+          <a class="language-card" href="/fonts/odia/">
+            <h3>Odia</h3>
+            <p>25 fonts • Odia script</p>
+          </a>
+          <a class="language-card" href="/fonts/bengali/">
+            <h3>Bengali</h3>
+            <p>25 fonts • Bangla script</p>
+          </a>
+          <a class="language-card" href="/fonts/urdu/">
+            <h3>Urdu</h3>
+            <p>25 fonts • Arabic script</p>
+          </a>
+          <a class="language-card" href="/fonts/assamese/">
+            <h3>Assamese</h3>
+            <p>25 fonts • Bangla script</p>
+          </a>
+        </div>
+      </section>
       <section class="controls" aria-labelledby="preview-heading">
         <h2 id="preview-heading">Live Preview</h2>
         <div class="controls-grid">
@@ -83,6 +161,15 @@
         </article>
       </section>
     </main>
+
+    <footer class="site-footer">
+      <p>Font Explorer — curated language font collections for creators and publishers.</p>
+      <nav aria-label="Footer">
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/terms-of-use/">Terms of Use</a>
+        <a href="/sitemap.xml">Sitemap</a>
+      </nav>
+    </footer>
 
     <template id="font-card-template">
       <article class="font-card" role="listitem">
